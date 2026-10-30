@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "@complymate/config": "workspace:*",
-    "@eslint/eslintrc": "3.3.1",
+    "@eslint/eslintrc": "3.3.7",
     "@playwright/test": "1.51.1",
     "@tailwindcss/postcss": "4.3.3",
     "@types/node": "22.10.2",
