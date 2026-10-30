@@ -20,7 +20,7 @@
     "oidc-client-ts": "3.5.0",
     "react": "19.1.10",
     "react-dom": "19.1.10",
-    "recharts": "2.15.4"
+    "recharts": "3.10.1"
   },
   "devDependencies": {
     "@complymate/config": "workspace:*",
