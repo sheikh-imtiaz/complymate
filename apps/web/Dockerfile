@@ -1,5 +1,5 @@
 # Next.js standalone image (Azure Container Apps / self-hosting). On AWS the app is deployed with Amplify Hosting.
-FROM node:22-alpine AS deps
+FROM node:25-alpine AS deps
 RUN corepack enable
 WORKDIR /repo
 COPY pnpm-workspace.yaml package.json pnpm-lock.yaml* ./
@@ -12,7 +12,7 @@ COPY apps/web apps/web
 ARG NEXT_PUBLIC_API_URL NEXT_PUBLIC_WS_URL NEXT_PUBLIC_WS_MODE NEXT_PUBLIC_AUTH_MODE NEXT_PUBLIC_OIDC_ISSUER NEXT_PUBLIC_OIDC_CLIENT_ID NEXT_PUBLIC_OIDC_DOMAIN NEXT_PUBLIC_ENVIRONMENT
 RUN pnpm --filter @complymate/web build
 
-FROM node:22-alpine AS runtime
+FROM node:25-alpine AS runtime
 ENV NODE_ENV=production PORT=3000 HOSTNAME=0.0.0.0
 WORKDIR /app
 RUN addgroup -S app && adduser -S app -G app
