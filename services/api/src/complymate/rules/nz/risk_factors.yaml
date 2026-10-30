@@ -1,0 +1,120 @@
+# ComplyMate AU risk rules. Deterministic: same facts + same version => same result.
+# General information, not legal advice. A compliance professional must review before launch.
+version: "nz-2026.10.1"
+jurisdiction: NZ
+home_country: NZ
+thresholds:
+  medium: 10
+  high: 20
+lists:
+  # FATF "black list" (high-risk jurisdictions subject to a call for action). Last checked: 2026-10-01
+  fatf_call_for_action: [KP, IR, MM]
+  # FATF "grey list" (jurisdictions under increased monitoring). Update after each FATF plenary. Last checked: 2026-10-01
+  fatf_increased_monitoring: [DZ, AO, BG, BO, CM, CD, CI, HT, KE, LA, LB, MC, MZ, NA, NP, NG, SS, SY, VE, VN, YE, VG]
+  # NZ sanctions regimes (indicative)
+  sanctioned_regimes: [RU, BY, SY, KP, IR, MM, LY, ZW, AF]
+  higher_risk_services:
+    - handling_client_money
+    - company_or_trust_formation
+    - nominee_director_or_shareholder
+    - real_estate_transaction
+    - registered_office_services
+factors:
+  # ---------------- customer ----------------
+  - id: customer.pep
+    category: customer
+    description: Client or a related party is a politically exposed person
+    when: { any: [ { fact: is_pep, op: truthy }, { fact: pep_any_party, op: truthy } ] }
+    points: 20
+    auto_level: high
+  - id: customer.trust
+    category: customer
+    description: Client is a trust
+    when: { fact: client_type, op: eq, value: trust }
+    points: 6
+  - id: customer.complex_structure
+    category: customer
+    description: Ownership structure has three or more layers
+    when: { fact: ownership_layers, op: gte, value: 3 }
+    points: 6
+  - id: customer.nominee_or_bearer
+    category: customer
+    description: Nominee directors/shareholders or bearer shares
+    when: { any: [ { fact: nominee_directors, op: truthy }, { fact: bearer_shares, op: truthy } ] }
+    points: 8
+  - id: customer.unidentified_beneficial_owner
+    category: customer
+    description: Beneficial owners (25% or more) not fully identified
+    when: { all: [ { fact: client_type, op: neq, value: individual }, { fact: beneficial_owners_identified, op: falsy } ] }
+    points: 8
+  - id: customer.cash_intensive
+    category: customer
+    description: Cash-intensive business or occupation
+    when: { fact: cash_intensive, op: truthy }
+    points: 6
+  - id: customer.source_of_funds_unverified
+    category: customer
+    description: Source of funds not verified
+    when: { fact: source_of_funds_verified, op: falsy }
+    points: 4
+  - id: customer.new_entity
+    category: customer
+    description: Entity incorporated less than 12 months ago
+    when: { all: [ { fact: client_type, op: neq, value: individual }, { fact: entity_age_months, op: lt, value: 12 } ] }
+    points: 3
+  # ---------------- service ----------------
+  - id: service.higher_risk
+    category: service
+    description: Higher-risk designated service requested
+    when: { fact: services, op: contains_any, value: { list: higher_risk_services } }
+    points: 5
+  - id: service.nominee
+    category: service
+    description: Acting as nominee director or shareholder
+    when: { fact: services, op: contains_any, value: [nominee_director_or_shareholder] }
+    points: 5
+  # ---------------- channel ----------------
+  - id: channel.non_face_to_face
+    category: channel
+    description: Client onboarded without meeting in person
+    when: { fact: channel, op: eq, value: non_face_to_face }
+    points: 4
+  - id: channel.intermediary
+    category: channel
+    description: Client introduced through an intermediary
+    when: { fact: channel, op: eq, value: intermediary }
+    points: 3
+  # ---------------- geography ----------------
+  - id: geography.fatf_call_for_action
+    category: geography
+    description: Link to a FATF high-risk jurisdiction (call for action)
+    when: { fact: countries, op: contains_any, value: { list: fatf_call_for_action } }
+    points: 20
+    auto_level: high
+  - id: geography.sanctioned_regime
+    category: geography
+    description: Link to a country subject to NZ Russia Sanctions Act or UN sanctions
+    when: { fact: countries, op: contains_any, value: { list: sanctioned_regimes } }
+    points: 10
+  - id: geography.fatf_increased_monitoring
+    category: geography
+    description: Link to a FATF jurisdiction under increased monitoring
+    when: { fact: countries, op: contains_any, value: { list: fatf_increased_monitoring } }
+    points: 8
+  - id: geography.foreign_resident
+    category: geography
+    description: Client resident or incorporated outside New Zealand
+    when: { fact: foreign, op: truthy }
+    points: 3
+  # ---------------- screening ----------------
+  - id: screening.true_match
+    category: customer
+    description: Confirmed sanctions match
+    when: { fact: screening_true_match, op: truthy }
+    points: 100
+    auto_level: high
+  - id: screening.open_matches
+    category: customer
+    description: Screening matches still under review
+    when: { fact: screening_open_matches, op: gt, value: 0 }
+    points: 5

@@ -1,0 +1,215 @@
+# Rule library seed. These are ComplyMate SUMMARIES of public regulator guidance for development and demo use.
+# Content Managers must replace them with the current official text (Platform Admin → Knowledge base) and set the
+# "last checked" date before launch. General information, not legal advice.
+sources:
+  - jurisdiction: AU
+    title: "AML/CTF reforms — Tranche 2 overview (summary)"
+    publisher: AUSTRAC
+    url: https://www.austrac.gov.au/amlctf-reform
+    last_checked: "2026-10-01"
+    content: |
+      # Who the reforms cover
+      The AML/CTF Amendment Act 2024 extends the AML/CTF regime to "tranche 2" entities that provide designated
+      services: real estate professionals, lawyers, conveyancers, accountants, trust and company service providers,
+      and dealers in precious stones and metals. For most of these services obligations start on 1 July 2026.
+      Businesses that provide designated services must enrol with AUSTRAC.
+
+      # Designated services (examples)
+      Designated services include assisting a person to buy, sell or transfer real estate; receiving, holding and
+      controlling client money or property for a transaction; creating or restructuring companies, trusts and other
+      legal arrangements; acting as or arranging for a person to act as a nominee director, shareholder or trustee;
+      providing a registered office or business address; and assisting with the sale or purchase of a business.
+      Services such as preparing tax returns, bookkeeping or litigation alone are generally not designated services.
+
+      # Core obligations
+      A reporting entity must enrol with AUSTRAC, develop and maintain an AML/CTF program, appoint an AML/CTF
+      compliance officer, conduct customer due diligence, report suspicious matters and threshold transactions, keep
+      records, and train staff.
+
+  - jurisdiction: AU
+    title: "AML/CTF programs and the compliance officer (summary)"
+    publisher: AUSTRAC
+    url: https://www.austrac.gov.au/business/core-guidance/amlctf-programs
+    last_checked: "2026-10-01"
+    content: |
+      # ML/TF risk assessment
+      A reporting entity must identify and assess the money laundering, terrorism financing and proliferation
+      financing risks it may reasonably face. The assessment considers customer types, designated services,
+      delivery channels and the countries it deals with. It must be reviewed and kept up to date, including when
+      there is a significant change.
+
+      # AML/CTF policies
+      The program sets out policies, procedures, systems and controls to manage and mitigate the risks identified,
+      including customer due diligence, reporting, record keeping, personnel due diligence and training.
+
+      # Governance and the AML/CTF compliance officer
+      The governing body or senior manager oversees the program and must approve it. A reporting entity must
+      designate an AML/CTF compliance officer at management level who is a fit and proper person and who
+      oversees day-to-day compliance. The compliance officer reports to the governing body.
+
+      # Independent evaluation
+      The program must be independently evaluated at least once every three years. The evaluator must be
+      independent of the program's design and operation. Findings must be reported to the governing body.
+
+  - jurisdiction: AU
+    title: "Customer due diligence (summary)"
+    publisher: AUSTRAC
+    url: https://www.austrac.gov.au/business/core-guidance/customer-identification-and-verification
+    last_checked: "2026-10-01"
+    content: |
+      # Initial customer due diligence
+      Before providing a designated service, a reporting entity must collect and verify information about the
+      customer on a risk basis: identity, any person acting on the customer's behalf, beneficial owners, and the
+      nature and purpose of the business relationship. Verification uses reliable and independent documents or data.
+
+      # Beneficial owners
+      A beneficial owner is an individual who ultimately owns (directly or indirectly) 25% or more of a customer, or
+      who otherwise controls it. For trusts this includes trustees, appointors and beneficiaries or classes of
+      beneficiaries. Reasonable steps must be taken to identify and verify beneficial owners.
+
+      # Politically exposed persons
+      Reporting entities must take reasonable steps to determine whether a customer or beneficial owner is a
+      politically exposed person (PEP). Foreign PEPs are always high risk. For high-risk PEPs, senior management
+      approval is needed and the source of wealth and source of funds must be established.
+
+      # Enhanced customer due diligence
+      Enhanced due diligence applies where ML/TF risk is high, where a customer is a foreign PEP or high-risk
+      domestic PEP, or where there is a link to a high-risk jurisdiction (for example a FATF call-for-action
+      country). Measures include more information about the customer and source of funds, senior approval and more
+      frequent monitoring.
+
+      # Ongoing customer due diligence
+      Customers must be monitored on an ongoing basis. Information is reviewed and updated based on risk, and when
+      there is a trigger event such as unusual activity or a change in ownership.
+
+  - jurisdiction: AU
+    title: "Reporting suspicious matters and tipping off (summary)"
+    publisher: AUSTRAC
+    url: https://www.austrac.gov.au/business/core-guidance/reporting/suspicious-matter-reports-smrs
+    last_checked: "2026-10-01"
+    content: |
+      # When to submit an SMR
+      A reporting entity must submit a suspicious matter report (SMR) to AUSTRAC if it forms a suspicion on
+      reasonable grounds that a matter may be related to money laundering, terrorism financing, tax evasion,
+      proceeds of crime or other serious offences, or that a customer is not who they claim to be.
+
+      # Timeframes
+      SMRs about terrorism financing must be submitted within 24 hours of forming the suspicion. All other SMRs
+      must be submitted within 3 business days.
+
+      # Tipping off
+      It is an offence to disclose to anyone other than AUSTRAC that an SMR has been or may be submitted, or any
+      information from which that could reasonably be inferred, except in limited circumstances allowed by the Act.
+      Staff must not tell a customer that a report has been made or is being considered.
+
+      # Threshold transaction reports
+      A threshold transaction report (TTR) must be submitted for a transaction involving physical currency of
+      A$10,000 or more within 10 business days.
+
+  - jurisdiction: AU
+    title: "Record keeping (summary)"
+    publisher: AUSTRAC
+    url: https://www.austrac.gov.au/business/core-guidance/record-keeping
+    last_checked: "2026-10-01"
+    content: |
+      # How long to keep records
+      Records of transactions, customer due diligence, the AML/CTF program and its changes must generally be kept
+      for 7 years. Records must be retrievable and able to be provided to AUSTRAC on request.
+
+  - jurisdiction: AU
+    title: "Targeted financial sanctions (summary)"
+    publisher: DFAT
+    url: https://www.dfat.gov.au/international-relations/security/sanctions/consolidated-list
+    last_checked: "2026-10-01"
+    content: |
+      # Sanctions screening
+      Australian sanctions laws prohibit dealing with assets of designated persons and entities listed on the DFAT
+      Consolidated List, and making assets available to them. Businesses should screen customers and beneficial
+      owners against the Consolidated List at onboarding and on an ongoing basis, including when the list changes.
+      A confirmed match must not be serviced and should be reported to DFAT; an SMR to AUSTRAC may also be required.
+
+  - jurisdiction: NZ
+    title: "AML/CFT Act obligations for DIA-supervised businesses (summary)"
+    publisher: DIA
+    url: https://www.dia.govt.nz/AML-CFT
+    last_checked: "2026-10-01"
+    content: |
+      # Who is covered
+      Lawyers, conveyancers, accountants, real estate agents, trust and company service providers and high-value
+      dealers are reporting entities under the AML/CFT Act 2009. The Department of Internal Affairs (DIA) supervises
+      most of these businesses.
+
+      # Programme and compliance officer
+      A reporting entity must undertake a written risk assessment, establish an AML/CFT programme based on it, and
+      appoint an AML/CFT compliance officer who reports to a senior manager.
+
+      # Customer due diligence
+      Standard, simplified or enhanced CDD applies depending on risk. Enhanced CDD applies to trusts, PEPs,
+      non-resident customers from high-risk countries and complex or unusually large transactions, and requires
+      source of funds or wealth information.
+
+      # Reporting
+      Suspicious activity reports must be submitted to the Police Financial Intelligence Unit as soon as practicable,
+      and no later than 3 working days after forming a suspicion. Prescribed transaction reports are required for
+      certain cash and international wire transactions. Tipping off is an offence.
+
+      # Audit, annual report and records
+      The risk assessment and programme must be independently audited every 3 years (or when the supervisor
+      requests). An annual AML/CFT report must be submitted to the supervisor. Records must be kept for at least 5
+      years.
+
+training_modules:
+  - title: "AML/CTF basics for all staff"
+    description: "What money laundering is, your firm's obligations and your role."
+    roles: [owner, amlco, senior_manager, staff]
+    jurisdiction: AU
+    duration_minutes: 15
+    pass_mark: 80
+    content_md: |
+      ## Why this matters
+      Firms that provide designated services must have an AML/CTF program. Every staff member helps the firm
+      know its customers, notice unusual activity and keep good records.
+
+      ## Your role
+      * Follow the customer due diligence steps before providing a service.
+      * Raise a concern with the AML/CTF compliance officer if something seems unusual.
+      * Never tell a customer that a concern has been raised or a report may be made (tipping off).
+      * Keep records in ComplyMate; they must be kept for 7 years.
+    questions:
+      - question: "How soon must a suspicious matter report about terrorism financing be lodged?"
+        options: ["Within 24 hours", "Within 3 business days", "Within 10 business days", "At the next annual review"]
+        correct_index: 0
+        explanation: "Terrorism financing SMRs are due within 24 hours; others within 3 business days."
+      - question: "A customer asks whether you have reported them to AUSTRAC. What should you do?"
+        options: ["Tell them the truth", "Say nothing about any report and speak to the compliance officer",
+                  "Email them the report", "Ask your manager to tell them"]
+        correct_index: 1
+        explanation: "Disclosing that a report has been or may be made can be the tipping-off offence."
+      - question: "How long must AML/CTF records generally be kept?"
+        options: ["1 year", "3 years", "7 years", "Until the client leaves"]
+        correct_index: 2
+        explanation: "Most AML/CTF records must be kept for 7 years."
+  - title: "Customer due diligence in practice"
+    description: "Identifying customers and beneficial owners, PEPs and enhanced due diligence."
+    roles: [amlco, senior_manager, staff]
+    jurisdiction: AU
+    duration_minutes: 20
+    pass_mark: 80
+    content_md: |
+      ## Know your customer
+      Collect and verify identity using reliable and independent documents or data.
+
+      ## Beneficial owners
+      Identify individuals who own 25% or more, directly or indirectly, or who control the customer.
+
+      ## Higher risk
+      Foreign PEPs are always high risk and need senior approval and source of wealth and funds checks.
+    questions:
+      - question: "What ownership level makes an individual a beneficial owner?"
+        options: ["10% or more", "25% or more", "50% or more", "Only 100%"]
+        correct_index: 1
+        explanation: "Individuals owning 25% or more (or who control the customer) are beneficial owners."
+      - question: "Which customer is always high risk?"
+        options: ["A local sole trader", "A foreign politically exposed person", "A retired teacher", "A company listed on the ASX"]
+        correct_index: 1
+        explanation: "Foreign PEPs are always treated as high risk."

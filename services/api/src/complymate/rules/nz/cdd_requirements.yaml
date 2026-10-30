@@ -1,0 +1,55 @@
+version: "nz-2026.10.1"
+jurisdiction: NZ
+client_types:
+  individual:
+    required_fields: [given_names, family_name, date_of_birth, residential_address]
+    verify_with_one_of:
+      - [passport]
+      - [drivers_licence]
+      - [birth_certificate, nz_firearms_licence]
+    checklist:
+      - Full name verified against a reliable and independent document
+      - Date of birth verified
+      - Residential address verified
+      - PEP declaration obtained
+  company:
+    required_fields: [legal_name, nzbn, registered_address, principal_place_of_business]
+    verify_with_one_of:
+      - [companies_office_extract]
+      - [certificate_of_registration]
+    checklist:
+      - Company registration verified (NZ Companies Office search)
+      - Directors identified
+      - Beneficial owners (25% or more, or control) identified and verified
+      - Nature of business recorded
+  trust:
+    required_fields: [legal_name, trust_type, settlor, trustees]
+    verify_with_one_of:
+      - [trust_deed]
+    checklist:
+      - Trust deed sighted
+      - Trustees identified and verified
+      - Beneficiaries or class of beneficiaries identified
+      - Settlor identified (unless exempt)
+      - Appointor / protector identified
+  partnership:
+    required_fields: [legal_name, partners]
+    verify_with_one_of:
+      - [partnership_agreement]
+    checklist:
+      - Partnership agreement sighted
+      - Managing partners identified and verified
+      - Partners with 25% or more identified
+edd_tasks:
+  - key: source_of_wealth
+    title: Obtain and verify source of wealth
+  - key: source_of_funds
+    title: Obtain and verify source of funds for this matter
+  - key: senior_approval
+    title: Senior management approval to proceed
+  - key: purpose_of_relationship
+    title: Record purpose and intended nature of the business relationship
+  - key: enhanced_monitoring
+    title: Set enhanced ongoing monitoring (shorter review cycle)
+  - key: adverse_media
+    title: Adverse media search and record result
