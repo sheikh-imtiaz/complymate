@@ -3,11 +3,12 @@ from __future__ import annotations
 from datetime import datetime
 from uuid import UUID
 
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, Field
 
 
 class DevLoginIn(BaseModel):
-    email: EmailStr
+    # Plain pattern (not EmailStr): local seed users use reserved domains such as demo.test.
+    email: str = Field(pattern=r"^[^@\s]+@[^@\s]+\.[^@\s]+$", max_length=320)
 
 
 class TokenOut(BaseModel):

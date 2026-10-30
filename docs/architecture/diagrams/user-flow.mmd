@@ -1,0 +1,35 @@
+flowchart TD
+  A[Firm signs up] --> B[Verify email and enrol MFA]
+  B --> C[Firm profile and services]
+  C --> D{Tranche 2 applies?}
+  D -- No --> D1[Show guidance and keep account]
+  D -- Yes --> E[Nominate AMLCO and invite team]
+  E --> F[Program Builder interview]
+  F --> G[Agent drafts program with citations]
+  G --> H[AMLCO edits]
+  H --> I{Owner or Senior Manager approves?}
+  I -- No --> H
+  I -- Yes --> J[Program v1 locked and exported]
+  J --> K[Staff creates new client]
+  K --> L[Upload ID and capture beneficial owners]
+  L --> M[OCR extracts fields, staff confirms]
+  M --> N[Sanctions and PEP screening]
+  N --> O{Possible match?}
+  O -- Yes --> P[AMLCO reviews match]
+  P --> Q{True match?}
+  Q -- Yes --> R[Decline client and consider SMR]
+  Q -- No --> S[Mark false positive]
+  O -- No --> S
+  S --> T[Rule engine scores risk]
+  T --> U{High risk?}
+  U -- Yes --> V[Enhanced due diligence]
+  V --> W{Second person approves?}
+  W -- No --> R
+  W -- Yes --> X[Client approved]
+  U -- No --> X
+  X --> Y[Set review date by risk]
+  Y --> Z[Nightly re-screening and reminders]
+  Z --> N
+  R --> AA[Audit log entry]
+  X --> AA
+  AA --> AB[Reports and regulator pack]

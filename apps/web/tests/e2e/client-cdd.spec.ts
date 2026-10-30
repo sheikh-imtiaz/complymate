@@ -9,10 +9,11 @@ test("staff onboard a client, screen and assess risk", async ({ page }) => {
   await page.getByLabel("Residential country").fill("AU");
   await page.getByRole("button", { name: "Save client" }).click();
   await page.waitForURL("**/owners");
-  await page.getByRole("link", { name: "Screening" }).click();
+  const clientUrl = page.url().replace(/\/owners$/, "");
+  await page.goto(`${clientUrl}/screening`);
   await page.getByRole("button", { name: "Run screening now" }).click();
-  await expect(page.getByText(/manual/i).first()).toBeVisible();
-  await page.getByRole("link", { name: "Risk" }).click();
+  await expect(page.getByRole("cell", { name: "manual" })).toBeVisible();
+  await page.goto(`${clientUrl}/risk`);
   await page.getByRole("button", { name: "Run risk assessment" }).click();
-  await expect(page.getByText(/risk/i).first()).toBeVisible();
+  await expect(page.getByText("Current rating")).toBeVisible();
 });

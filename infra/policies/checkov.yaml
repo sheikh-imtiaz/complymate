@@ -1,0 +1,20 @@
+# Checkov configuration for infra/terraform (security-scan.yml).
+framework:
+  - terraform
+compact: true
+quiet: true
+soft-fail: false
+download-external-modules: false
+skip-check:
+  # Lambda functions are in a VPC behind API Gateway; concurrency limits are set per environment instead.
+  - CKV_AWS_115
+  # Code signing for container-image Lambdas is handled by ECR image scanning + immutable tags.
+  - CKV_AWS_272
+  # Dead-letter queues apply to async invocations; the API Lambda is synchronous (SQS DLQs cover workers).
+  - CKV_AWS_116
+  # CloudFront access logging is enabled per environment when a log bucket is provided.
+  - CKV_AWS_86
+  # The exports bucket uses lifecycle expiry; cross-region replication is not used to keep data in Australia.
+  - CKV_AWS_144
+  # S3 event notifications are not needed for these buckets.
+  - CKV2_AWS_62

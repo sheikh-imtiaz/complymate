@@ -1,0 +1,13 @@
+{
+  "name": "Run tests on save",
+  "description": "Runs the relevant fast test suite when a source file is saved.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": ["services/api/src/**/*.py", "services/api/tests/**/*.py", "apps/web/src/**/*.{ts,tsx}"]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A file was saved. If it is under services/api, run `cd services/api && uv run pytest -q tests/unit tests/evals` (and the matching integration test if a router or migration changed). If it is under apps/web, run `pnpm --filter @complymate/web test`. Report failures with the file and line, and suggest a fix."
+  }
+}

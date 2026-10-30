@@ -1,0 +1,21 @@
+sequenceDiagram
+  participant U as User
+  participant FE as Next.js app
+  participant API as FastAPI / WS Lambda
+  participant AZ as AuthZ check
+  participant AG as Strands agent
+  participant DB as PostgreSQL + pgvector
+  participant LLM as LLM provider
+  U->>FE: Ask question
+  FE->>API: chat message (JWT, tenant)
+  API->>AZ: Check permission + tenant (RLS context)
+  AZ-->>API: Allowed
+  API->>AG: Run with user context (guardrails on input)
+  AG->>DB: Vector search rule library
+  AG->>LLM: Prompt + sources
+  LLM-->>AG: Answer or tool call
+  AG->>DB: Tool: read client risk (RLS)
+  AG->>LLM: Final answer
+  AG-->>API: Answer + citations (guardrails on output)
+  API->>DB: Write audit + usage + cost
+  API-->>FE: Stream tokens, citations, done

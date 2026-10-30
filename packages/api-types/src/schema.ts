@@ -3196,10 +3196,7 @@ export interface components {
         };
         /** DevLoginIn */
         DevLoginIn: {
-            /**
-             * Email
-             * Format: email
-             */
+            /** Email */
             email: string;
         };
         /** DirectoryEntry */

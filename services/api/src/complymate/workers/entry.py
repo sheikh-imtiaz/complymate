@@ -53,7 +53,17 @@ async def migrate(payload: dict[str, Any]) -> dict[str, Any]:
     return {"status": "migrated"}
 
 
+async def run_evals(payload: dict[str, Any]) -> dict[str, Any]:
+    """Nightly model evals (nightly-evals.yml invokes the worker Lambda so it runs inside the VPC)."""
+    from uuid import UUID
+
+    from complymate.agent.evals.run_evals import run
+
+    return await run(UUID(payload["tenant_id"]), float(payload.get("min_score", 0.85)))
+
+
 TASKS: dict[str, Handler] = {
+    "run_evals": run_evals,
     "migrate": migrate,
     "seed_reference": seed_reference.run,
     "ocr_document": ocr_document.run,
@@ -101,8 +111,10 @@ async def serve() -> None:
 
     container = get_container()
     cron = container.scheduler if isinstance(container.scheduler, CronScheduler) else CronScheduler()
-    for name, (expr, task) in DEFAULT_SCHEDULES.items():
-        await cron.upsert_schedule(name, expr, task, {})
+    # On Azure, Container Apps Jobs run the schedules (RUN_SCHEDULES=false); locally this loop does.
+    if os.environ.get("RUN_SCHEDULES", "true").lower() == "true":
+        for name, (expr, task) in DEFAULT_SCHEDULES.items():
+            await cron.upsert_schedule(name, expr, task, {})
     consumers = []
     if container.settings.cloud_provider == "azure":
         consumers.append(asyncio.create_task(_consume_servicebus()))

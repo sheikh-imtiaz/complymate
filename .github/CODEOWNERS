@@ -1,0 +1,10 @@
+# Default reviewers
+*                                   @sheikh-imtiaz
+
+# Security-sensitive areas need a second look
+/services/api/migrations/           @sheikh-imtiaz
+/services/api/src/complymate/domain/rbac/   @sheikh-imtiaz
+/services/api/src/complymate/domain/audit/  @sheikh-imtiaz
+/services/api/src/complymate/rules/         @sheikh-imtiaz
+/infra/                             @sheikh-imtiaz
+/.github/workflows/                 @sheikh-imtiaz

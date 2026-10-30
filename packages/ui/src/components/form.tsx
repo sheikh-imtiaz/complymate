@@ -27,10 +27,14 @@ export function Label({ className, ...props }: React.LabelHTMLAttributes<HTMLLab
 }
 
 export function Field({ label, hint, error, children }: { label: string; hint?: string; error?: string; children: React.ReactNode }) {
+  // Associate the label with its control (accessible name for screen readers and getByLabel in tests).
+  const generated = React.useId();
+  const child = React.isValidElement<{ id?: string }>(children) ? children : null;
+  const id = child?.props.id ?? generated;
   return (
     <div className="flex flex-col gap-1.5">
-      <Label>{label}</Label>
-      {children}
+      <Label htmlFor={id}>{label}</Label>
+      {child ? React.cloneElement(child, { id }) : children}
       {error ? <p className="text-xs text-red-600">{error}</p> : hint ? <p className="text-xs text-slate-500">{hint}</p> : null}
     </div>
   );

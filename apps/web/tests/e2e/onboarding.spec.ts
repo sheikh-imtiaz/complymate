@@ -7,7 +7,7 @@ test("new firm sign-up runs the designated services check", async ({ page }) => 
   await page.getByRole("button", { name: /get started/i }).click();
   await page.waitForURL("**/onboarding");
   await page.getByLabel("Firm name").fill("E2E Conveyancing Pty Ltd");
-  await page.getByRole("button", { name: "Next" }).click();
+  await page.getByRole("button", { name: "Next", exact: true }).click();
   await page.getByText(/buy, sell or transfer real estate/i).click();
   await page.getByRole("button", { name: /check obligations/i }).click();
   await expect(page.getByText(/obligations likely apply/i)).toBeVisible();

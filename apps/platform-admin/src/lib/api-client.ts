@@ -23,7 +23,9 @@ export async function api<T = unknown>(path: string, init: { method?: string; bo
   if (!resp.ok) {
     const data = await resp.json().catch(() => ({}));
     const code = data?.error?.code ?? `http_${resp.status}`;
-    if (resp.status === 401 && code !== "step_up_mfa_required") window.location.href = "/sign-in";
+    if (resp.status === 401 && code !== "step_up_mfa_required" && !window.location.pathname.startsWith("/sign-in")) {
+      window.location.href = "/sign-in";
+    }
     if (code === "step_up_mfa_required") window.dispatchEvent(new CustomEvent("cm:step-up"));
     throw new ApiError(resp.status, code, data?.error?.message ?? resp.statusText);
   }

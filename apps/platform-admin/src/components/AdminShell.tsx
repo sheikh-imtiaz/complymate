@@ -28,11 +28,14 @@ const NAV = [
 export function AdminShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
-  const { data: me, error, isLoading } = useQuery({ queryKey: ["me"], queryFn: () => get<Me>("/auth/me"), retry: false });
+  const isAuthPage = pathname.startsWith("/sign-in") || pathname.startsWith("/callback");
+  const { data: me, error, isLoading } = useQuery({
+    queryKey: ["me"], queryFn: () => get<Me>("/auth/me"), retry: false, enabled: !isAuthPage,
+  });
   useEffect(() => {
-    if (error) router.replace("/sign-in");
-  }, [error, router]);
-  if (pathname.startsWith("/sign-in") || pathname.startsWith("/callback")) return <>{children}</>;
+    if (error && !isAuthPage) router.replace("/sign-in");
+  }, [error, isAuthPage, router]);
+  if (isAuthPage) return <>{children}</>;
   if (isLoading || !me) return <div className="flex min-h-screen items-center justify-center"><Spinner /></div>;
   if (!me.platform_role) {
     return <div className="p-10 text-center">This console is for ComplyMate staff only. <Button variant="link" onClick={() => void signOut()}>Sign out</Button></div>;
