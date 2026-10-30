@@ -24,7 +24,7 @@ importers:
         version: 0.469.0(react@19.1.10)
       next:
         specifier: 15.5.28
-        version: 15.5.28(@babel/core@7.29.7)(@playwright/test@1.51.1)(@types/node@22.10.2)(react-dom@19.1.10(react@19.1.10))(react@19.1.10)
+        version: 15.5.28(@babel/core@7.29.7)(@playwright/test@1.64.1)(@types/node@22.10.2)(react-dom@19.1.10(react@19.1.10))(react@19.1.10)
       oidc-client-ts:
         specifier: 3.5.0
         version: 3.5.0
@@ -45,8 +45,8 @@ importers:
         specifier: 3.3.1
         version: 3.3.1
       '@playwright/test':
-        specifier: 1.51.1
-        version: 1.51.1
+        specifier: 1.64.1
+        version: 1.64.1
       '@tailwindcss/postcss':
         specifier: 4.3.3
         version: 4.3.3
@@ -100,10 +100,10 @@ importers:
         version: 0.469.0(react@19.1.10)
       next:
         specifier: 15.5.28
-        version: 15.5.28(@babel/core@7.29.7)(@playwright/test@1.51.1)(@types/node@22.10.2)(react-dom@19.1.10(react@19.1.10))(react@19.1.10)
+        version: 15.5.28(@babel/core@7.29.7)(@playwright/test@1.64.1)(@types/node@22.10.2)(react-dom@19.1.10(react@19.1.10))(react@19.1.10)
       next-intl:
         specifier: 3.26.5
-        version: 3.26.5(next@15.5.28(@babel/core@7.29.7)(@playwright/test@1.51.1)(@types/node@22.10.2)(react-dom@19.1.10(react@19.1.10))(react@19.1.10))(react@19.1.10)
+        version: 3.26.5(next@15.5.28(@babel/core@7.29.7)(@playwright/test@1.64.1)(@types/node@22.10.2)(react-dom@19.1.10(react@19.1.10))(react@19.1.10))(react@19.1.10)
       oidc-client-ts:
         specifier: 3.5.0
         version: 3.5.0
@@ -130,8 +130,8 @@ importers:
         specifier: 3.3.1
         version: 3.3.1
       '@playwright/test':
-        specifier: 1.51.1
-        version: 1.51.1
+        specifier: 1.64.1
+        version: 1.64.1
       '@tailwindcss/postcss':
         specifier: 4.3.3
         version: 4.3.3
@@ -836,9 +836,9 @@ packages:
     resolution: {integrity: sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==}
     engines: {node: '>=12.4.0'}
 
-  '@playwright/test@1.51.1':
-    resolution: {integrity: sha512-nM+kEaTSAoVlXmMPH10017vn3FSiFqr/bh4fKg9vmAdMfd9SDqRZNvPSiAHADc/itWak+qPvMPZQOPwCBW7k7Q==}
-    engines: {node: '>=18'}
+  '@playwright/test@1.64.1':
+    resolution: {integrity: sha512-IaYGml/nSOiZWROfPtuIL7neuu9qDOZ3TNvNljUIrhDMxiGTgPjzj/g9p9RxpS2tSepPDRY+UwAaEeiKtUvIAg==}
+    engines: {node: '>=20'}
     hasBin: true
 
   '@popperjs/core@2.11.8':
@@ -2381,11 +2381,6 @@ packages:
     resolution: {integrity: sha512-vKatAh4SlVfgbv+YtmhiRjhEMJsYpsG1Y2rMQtR+SVSbytsSD1YGzDIcrAJmdFec88u/+VoGmxnl+80gL1tRCQ==}
     engines: {node: '>= 6'}
 
-  fsevents@2.3.2:
-    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
-    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
-    os: [darwin]
-
   fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
@@ -3033,14 +3028,14 @@ packages:
     resolution: {integrity: sha512-qcJu88Q2IWqJsDD529JKMdwGm/dvInW4HvQnRwiH9JtihJvzGOscDtHE3x1pBKeUOTysQ8kVmLnJ2kJu7yhcGA==}
     engines: {node: '>=12'}
 
-  playwright-core@1.51.1:
-    resolution: {integrity: sha512-/crRMj8+j/Nq5s8QcvegseuyeZPxpQCZb6HNk3Sos3BlZyAknRjoyJPFWkpNn8v0+P3WiwqFF8P+zQo4eqiNuw==}
-    engines: {node: '>=18'}
+  playwright-core@1.64.1:
+    resolution: {integrity: sha512-BC4s8y6SEVA6Q1rSxZTto8hI1KUI3xXlHGZgvGqP4IqPdI/a6FX9H29IDNz7vKo9l21b6LfYosScPL6M3xxyDQ==}
+    engines: {node: '>=20'}
     hasBin: true
 
-  playwright@1.51.1:
-    resolution: {integrity: sha512-kkx+MB2KQRkyxjYPc3a0wLZZoDczmppyGJIvQ43l+aZihkaVvmu/21kiyaHeHjiFxjxNNFnUncKmcGIyOojsaw==}
-    engines: {node: '>=18'}
+  playwright@1.64.1:
+    resolution: {integrity: sha512-HCrVhHr5QQuwYoswEUGTb7gGp522yflbv/ST8nF4sFWGuLjQCt17Q/EubpGGSNKYn1tsTCPZxqHhHCfVURu7UA==}
+    engines: {node: '>=20'}
     hasBin: true
 
   pluralize@8.0.0:
@@ -4267,9 +4262,9 @@ snapshots:
 
   '@nolyfill/is-core-module@1.0.39': {}
 
-  '@playwright/test@1.51.1':
+  '@playwright/test@1.64.1':
     dependencies:
-      playwright: 1.51.1
+      playwright: 1.64.1
 
   '@popperjs/core@2.11.8': {}
 
@@ -5925,9 +5920,6 @@ snapshots:
       hasown: 2.0.4
       mime-types: 2.1.35
 
-  fsevents@2.3.2:
-    optional: true
-
   fsevents@2.3.3:
     optional: true
 
@@ -6420,15 +6412,15 @@ snapshots:
     dependencies:
       content-type: 2.1.0
 
-  next-intl@3.26.5(next@15.5.28(@babel/core@7.29.7)(@playwright/test@1.51.1)(@types/node@22.10.2)(react-dom@19.1.10(react@19.1.10))(react@19.1.10))(react@19.1.10):
+  next-intl@3.26.5(next@15.5.28(@babel/core@7.29.7)(@playwright/test@1.64.1)(@types/node@22.10.2)(react-dom@19.1.10(react@19.1.10))(react@19.1.10))(react@19.1.10):
     dependencies:
       '@formatjs/intl-localematcher': 0.5.10
       negotiator: 1.1.0
-      next: 15.5.28(@babel/core@7.29.7)(@playwright/test@1.51.1)(@types/node@22.10.2)(react-dom@19.1.10(react@19.1.10))(react@19.1.10)
+      next: 15.5.28(@babel/core@7.29.7)(@playwright/test@1.64.1)(@types/node@22.10.2)(react-dom@19.1.10(react@19.1.10))(react@19.1.10)
       react: 19.1.10
       use-intl: 3.26.5(react@19.1.10)
 
-  next@15.5.28(@babel/core@7.29.7)(@playwright/test@1.51.1)(@types/node@22.10.2)(react-dom@19.1.10(react@19.1.10))(react@19.1.10):
+  next@15.5.28(@babel/core@7.29.7)(@playwright/test@1.64.1)(@types/node@22.10.2)(react-dom@19.1.10(react@19.1.10))(react@19.1.10):
     dependencies:
       '@next/env': 15.5.28
       '@swc/helpers': 0.5.15
@@ -6446,7 +6438,7 @@ snapshots:
       '@next/swc-linux-x64-musl': 15.5.28
       '@next/swc-win32-arm64-msvc': 15.5.28
       '@next/swc-win32-x64-msvc': 15.5.28
-      '@playwright/test': 1.51.1
+      '@playwright/test': 1.64.1
       sharp: 0.35.5(@types/node@22.10.2)
     transitivePeerDependencies:
       - '@babel/core'
@@ -6576,13 +6568,11 @@ snapshots:
 
   picomatch@4.0.7: {}
 
-  playwright-core@1.51.1: {}
+  playwright-core@1.64.1: {}
 
-  playwright@1.51.1:
+  playwright@1.64.1:
     dependencies:
-      playwright-core: 1.51.1
-    optionalDependencies:
-      fsevents: 2.3.2
+      playwright-core: 1.64.1
 
   pluralize@8.0.0: {}
 
