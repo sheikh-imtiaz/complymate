@@ -44,10 +44,29 @@ Seeded users (password-less dev sign-in): `owner@demo.test`, `amlco@demo.test`, 
 ## Tests
 
 ```bash
-make test        # ruff + mypy + pytest (unit, integration with Testcontainers, contract)
-pnpm -r test     # Vitest
-pnpm --filter web e2e   # Playwright
+make test                                   # ruff + mypy + pytest (unit, integration, contract, guardrail evals)
+pnpm -r typecheck && pnpm -r lint           # TypeScript + ESLint
+pnpm --filter @complymate/web test          # Vitest
+pnpm --filter @complymate/web e2e           # Playwright (needs `make api`, `make seed`, `make web`)
+pnpm --filter @complymate/platform-admin e2e
 ```
+
+Integration tests need PostgreSQL 16 with pgvector: either Docker (Testcontainers starts `pgvector/pgvector:pg16`)
+or an empty database you point at with
+`TEST_DATABASE_ADMIN_URL=postgresql+asyncpg://<owner>:<pw>@localhost:5432/complymate_test`.
+
+## What is in the box
+
+* **Backend** — 24 routers (~165 endpoints), 13 migrations with RLS on every tenant table, append-only hash-chained
+  audit log, deterministic YAML risk engine (AU + NZ rule sets), fuzzy/phonetic sanctions matcher, Strands agent
+  with RAG + guardrails, 18 worker tasks, AWS/Azure/local adapters for 12 ports.
+* **Frontend** — tenant app (onboarding, program builder, CDD, screening, SMR, Ask the Rules, training, tasks,
+  reports, audit log, firm admin) and a separate platform admin app.
+* **Infra** — Terraform for AWS (dev/staging/prod) and Azure (staging/prod), all stacks pass `terraform validate`.
+* **Delivery** — GitHub Actions for CI, security scans, AWS/Azure deploys (OIDC, no stored keys), nightly evals.
+
+The rule library and risk rules ship as **summaries for development**; replace them with current official
+guidance and have a compliance professional review them before launch.
 
 ## Deploying to AWS
 
