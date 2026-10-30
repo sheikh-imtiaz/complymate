@@ -56,7 +56,7 @@ jobs:
       - uses: pnpm/action-setup@v4
         with:
           version: 9.15.0
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: pnpm
@@ -99,7 +99,7 @@ jobs:
         with: { version: "0.5.11" }
       - uses: pnpm/action-setup@v4
         with: { version: 9.15.0 }
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with: { node-version: 22, cache: pnpm }
       - run: sudo apt-get update && sudo apt-get install -y libpango-1.0-0 libpangoft2-1.0-0
       - run: cd services/api && uv sync && uv run alembic upgrade head && uv run python scripts/seed_dev.py
