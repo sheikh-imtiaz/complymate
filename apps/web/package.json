@@ -19,7 +19,7 @@
     "@tanstack/react-table": "8.21.3",
     "@tiptap/react": "2.27.3",
     "@tiptap/starter-kit": "2.27.3",
-    "lucide-react": "0.469.0",
+    "lucide-react": "1.62.0",
     "next": "15.5.28",
     "next-intl": "3.26.5",
     "oidc-client-ts": "3.5.0",
