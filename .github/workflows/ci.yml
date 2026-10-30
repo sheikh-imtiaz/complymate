@@ -33,7 +33,7 @@ jobs:
       TEST_DATABASE_ADMIN_URL: postgresql+asyncpg://complymate_owner:owner_password@localhost:5432/complymate_test
     steps:
       - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v4
+      - uses: astral-sh/setup-uv@v7
         with:
           version: "0.5.11"
           enable-cache: true
@@ -95,7 +95,7 @@ jobs:
       NEXT_PUBLIC_AUTH_MODE: dev
     steps:
       - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v4
+      - uses: astral-sh/setup-uv@v7
         with: { version: "0.5.11" }
       - uses: pnpm/action-setup@v4
         with: { version: 9.15.0 }
