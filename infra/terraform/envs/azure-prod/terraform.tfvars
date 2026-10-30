@@ -1,0 +1,9 @@
+location          = "australiaeast"
+vnet_cidr         = "10.52.0.0/16"
+db_sku            = "GP_Standard_D4ds_v5"
+oidc_issuer       = "https://complymate.ciamlogin.com/00000000-0000-0000-0000-000000000000/v2.0"
+web_url           = "https://app.complymate.example"
+admin_url         = "https://admin.complymate.example"
+email_from        = "no-reply@complymate.example"
+monthly_budget    = 2500
+budget_start_date = "2026-11-01T00:00:00Z"

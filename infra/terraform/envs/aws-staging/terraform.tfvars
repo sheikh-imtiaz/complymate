@@ -1,0 +1,12 @@
+zone_name                   = null # e.g. "staging.complymate.com.au"
+alert_emails                = []
+vpc_cidr                    = "10.41.0.0/16"
+az_count                    = 2
+enable_nat_gateway          = true
+endpoint_services           = ["secretsmanager", "sqs", "kms", "bedrock-runtime", "textract", "logs"]
+db_min_acu                  = 0.5
+db_max_acu                  = 8
+db_instance_count           = 1
+api_provisioned_concurrency = 0
+llm_monthly_budget_usd      = 200
+monthly_budget_usd          = 600

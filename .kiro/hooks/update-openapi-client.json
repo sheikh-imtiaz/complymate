@@ -1,0 +1,13 @@
+{
+  "name": "Update OpenAPI client",
+  "description": "Regenerates docs/api/openapi.json and packages/api-types when routers or schemas change.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": ["services/api/src/complymate/api/routers/*.py", "services/api/src/complymate/schemas/*.py"]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "API routes or schemas changed. Run `make openapi` from the repo root, then `pnpm -r typecheck`. Fix any TypeScript errors caused by changed response types."
+  }
+}

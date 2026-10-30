@@ -1,0 +1,65 @@
+# Local stack: Postgres+pgvector, MinIO, LocalStack, Mailpit
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: complymate_owner
+      POSTGRES_PASSWORD: owner_password
+      POSTGRES_DB: complymate
+    ports: ["5432:5432"]
+    volumes: ["pgdata:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U complymate_owner -d complymate"]
+      interval: 5s
+      retries: 10
+
+  minio:
+    image: minio/minio:RELEASE.2024-12-18T13-15-44Z
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    ports: ["9000:9000", "9001:9001"]
+    volumes: ["miniodata:/data"]
+
+  minio-init:
+    image: minio/mc:RELEASE.2024-11-21T17-21-54Z
+    depends_on: [minio]
+    entrypoint: >
+      /bin/sh -c "
+      sleep 3;
+      mc alias set local http://minio:9000 minioadmin minioadmin;
+      mc mb -p local/complymate-documents local/complymate-exports;
+      mc mb -p --with-lock local/complymate-audit;
+      exit 0;"
+
+  localstack:
+    image: localstack/localstack:3.8
+    environment:
+      SERVICES: sqs,secretsmanager,kms,ses,scheduler,events
+      AWS_DEFAULT_REGION: ap-southeast-2
+    ports: ["4566:4566"]
+    volumes:
+      - ./tools/localstack/init.sh:/etc/localstack/init/ready.d/init.sh:ro
+
+  mailpit:
+    image: axllent/mailpit:v1.21
+    ports: ["1025:1025", "8025:8025"]
+
+  api:
+    profiles: ["full"]
+    build:
+      context: services/api
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql+asyncpg://complymate_app:app_password@postgres:5432/complymate
+      DATABASE_ADMIN_URL: postgresql+asyncpg://complymate_owner:owner_password@postgres:5432/complymate
+      S3_ENDPOINT_URL: http://minio:9000
+      SMTP_HOST: mailpit
+    ports: ["8000:8080"]
+    depends_on:
+      postgres: { condition: service_healthy }
+
+volumes:
+  pgdata:
+  miniodata:

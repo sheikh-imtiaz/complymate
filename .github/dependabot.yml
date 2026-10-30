@@ -1,0 +1,26 @@
+version: 2
+updates:
+  - package-ecosystem: "uv"
+    directory: "/services/api"
+    schedule: { interval: "weekly", day: "monday" }
+    open-pull-requests-limit: 10
+    groups:
+      aws: { patterns: ["boto3*", "botocore*", "moto*"] }
+      azure: { patterns: ["azure-*"] }
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule: { interval: "weekly", day: "monday" }
+    open-pull-requests-limit: 10
+    groups:
+      next: { patterns: ["next", "eslint-config-next", "react", "react-dom", "@types/react*"] }
+      tiptap: { patterns: ["@tiptap/*"] }
+      radix: { patterns: ["@radix-ui/*"] }
+  - package-ecosystem: "terraform"
+    directories: ["/infra/terraform/envs/aws-dev", "/infra/terraform/envs/aws-staging", "/infra/terraform/envs/aws-prod", "/infra/terraform/envs/azure-staging", "/infra/terraform/envs/azure-prod"]
+    schedule: { interval: "weekly" }
+  - package-ecosystem: "docker"
+    directories: ["/services/api", "/apps/web", "/apps/platform-admin"]
+    schedule: { interval: "weekly" }
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule: { interval: "weekly" }

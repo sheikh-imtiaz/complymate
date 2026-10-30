@@ -1,0 +1,17 @@
+flowchart LR
+  U[Users] --> FD[Front Door + WAF]
+  FD --> WEB[Container App: web]
+  FD --> ADM[Container App: admin]
+  FD --> API[Container App: api<br/>uvicorn + /ws/chat]
+  WEB --> ENTRA[Entra External ID]
+  API --> PG[(PostgreSQL Flexible 16<br/>pgvector + RLS)]
+  API --> BLOB[Blob Storage<br/>documents / exports]
+  API --> SB[Service Bus]
+  SB --> WRK[Container App: worker]
+  JOBS[Container Apps Jobs<br/>cron] --> PG
+  WRK --> DI[Document Intelligence]
+  API --> AIF[AI Foundry Claude / Azure OpenAI]
+  WRK --> IMM[Blob immutable audit]
+  API --> KV[Key Vault]
+  API --> ACS[Communication Services Email]
+  API --> MON[App Insights / Log Analytics]

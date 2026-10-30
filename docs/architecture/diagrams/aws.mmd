@@ -1,0 +1,49 @@
+flowchart LR
+  subgraph Users
+    U1[Firm users]
+    U2[Platform admins]
+  end
+  subgraph Edge
+    R53[Route 53]
+    CF[CloudFront + AWS WAF]
+  end
+  COG[Cognito User Pool<br/>MFA, OIDC]
+  AMP[Amplify Hosting<br/>Next.js web + admin]
+  subgraph API_Layer[API layer]
+    APIGW[API Gateway HTTP API<br/>JWT authorizer]
+    LAPI[Lambda: FastAPI<br/>container image]
+    LWS[API Gateway WebSocket<br/>chat streaming]
+  end
+  subgraph Workers
+    SQS[SQS queues + DLQs]
+    LW[Lambda worker]
+    EBS[EventBridge Scheduler]
+    SFN[Step Functions]
+  end
+  subgraph AI
+    BR[Bedrock Claude + Titan]
+    GR[Bedrock Guardrails]
+    TX[Textract]
+  end
+  subgraph Data
+    PRX[RDS Proxy]
+    RDS[Aurora PostgreSQL v2<br/>pgvector + RLS]
+    S3D[S3 documents/exports<br/>KMS]
+    S3A[S3 audit archive<br/>Object Lock]
+    SM[Secrets Manager]
+  end
+  U1 --> R53 --> AMP
+  U2 --> R53
+  AMP --> COG
+  AMP --> CF --> APIGW --> LAPI
+  AMP --> LWS
+  LAPI --> PRX --> RDS
+  LAPI --> S3D
+  LAPI --> BR --> GR
+  LAPI --> SQS --> LW
+  EBS --> SQS
+  LAPI --> SFN --> LW
+  LW --> TX
+  LW --> PRX
+  LW --> S3A
+  LAPI --> SM

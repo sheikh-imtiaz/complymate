@@ -1,0 +1,125 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  api:
+    name: API (lint, types, tests)
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: complymate_owner
+          POSTGRES_PASSWORD: owner_password
+          POSTGRES_DB: complymate_test
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U complymate_owner" --health-interval 5s --health-timeout 5s --health-retries 10
+    defaults:
+      run:
+        working-directory: services/api
+    env:
+      TEST_DATABASE_ADMIN_URL: postgresql+asyncpg://complymate_owner:owner_password@localhost:5432/complymate_test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v4
+        with:
+          version: "0.5.11"
+          enable-cache: true
+      - run: sudo apt-get update && sudo apt-get install -y libpango-1.0-0 libpangoft2-1.0-0
+      - run: uv sync --extra dev
+      - run: uv run ruff check src tests scripts migrations
+      - run: uv run ruff format --check src tests scripts migrations
+      - run: uv run mypy src
+      - run: uv run pytest -q --cov=complymate --cov-report=xml
+      - name: OpenAPI is up to date
+        run: |
+          uv run python scripts/export_openapi.py /tmp/openapi.json
+          diff -q /tmp/openapi.json ../../docs/api/openapi.json || (echo "Run 'make openapi' and commit docs/api/openapi.json" && exit 1)
+
+  web:
+    name: Frontend (types, lint, unit, build)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @complymate/api-types generate && git diff --exit-code packages/api-types/src/schema.ts
+      - run: pnpm -r typecheck
+      - run: pnpm -r lint
+      - run: pnpm --filter @complymate/web test
+      - run: pnpm --filter @complymate/web build
+        env: { NEXT_TELEMETRY_DISABLED: "1" }
+      - run: pnpm --filter @complymate/platform-admin build
+        env: { NEXT_TELEMETRY_DISABLED: "1" }
+
+  e2e:
+    name: E2E (Playwright against the local stack)
+    runs-on: ubuntu-latest
+    needs: [api, web]
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env: { POSTGRES_USER: complymate_owner, POSTGRES_PASSWORD: owner_password, POSTGRES_DB: complymate }
+        ports: ["5432:5432"]
+        options: --health-cmd "pg_isready -U complymate_owner" --health-interval 5s --health-retries 10
+      minio:
+        image: bitnami/minio:2024.12.18
+        env: { MINIO_ROOT_USER: minioadmin, MINIO_ROOT_PASSWORD: minioadmin, MINIO_DEFAULT_BUCKETS: "complymate-documents,complymate-exports,complymate-audit" }
+        ports: ["9000:9000"]
+    env:
+      CLOUD_PROVIDER: local
+      DATABASE_URL: postgresql+asyncpg://complymate_app:app_password@localhost:5432/complymate
+      DATABASE_ADMIN_URL: postgresql+asyncpg://complymate_owner:owner_password@localhost:5432/complymate
+      APP_DB_PASSWORD: app_password
+      S3_ENDPOINT_URL: http://localhost:9000
+      S3_ACCESS_KEY: minioadmin
+      S3_SECRET_KEY: minioadmin
+      NEXT_PUBLIC_AUTH_MODE: dev
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v4
+        with: { version: "0.5.11" }
+      - uses: pnpm/action-setup@v4
+        with: { version: 9.15.0 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: pnpm }
+      - run: sudo apt-get update && sudo apt-get install -y libpango-1.0-0 libpangoft2-1.0-0
+      - run: cd services/api && uv sync && uv run alembic upgrade head && uv run python scripts/seed_dev.py
+      - run: cd services/api && (uv run uvicorn complymate.main:app --port 8000 &) && sleep 5
+      - run: pnpm install --frozen-lockfile && pnpm --filter @complymate/web exec playwright install --with-deps chromium
+      - run: pnpm --filter @complymate/web e2e
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with: { name: playwright-report, path: apps/web/playwright-report }
+
+  terraform:
+    name: Terraform (fmt, validate)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+        with: { terraform_version: 1.9.8 }
+      - run: terraform fmt -check -recursive infra/terraform
+      - name: validate
+        run: |
+          for d in infra/terraform/global infra/terraform/envs/*; do
+            (cd "$d" && terraform init -backend=false -input=false >/dev/null && terraform validate) || exit 1
+          done

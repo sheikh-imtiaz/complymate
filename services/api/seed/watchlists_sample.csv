@@ -1,0 +1,11 @@
+Source,Reference,Name,Type,Aliases,Date of Birth,Nationality,Regime
+SAMPLE,S-0001,Viktor Petrovich Ivanov,Individual,Viktor Ivanoff;V. P. Ivanov,1961-03-14,RU,Sample Russia regime
+SAMPLE,S-0002,Kim Chol Su,Individual,Kim Chul Soo,1970,KP,Sample DPRK regime
+SAMPLE,S-0003,Abdul Rahman Al-Fulani,Individual,Abdulrahman al Fulani;Abu Rahman,1978-11-02,SY,Sample counter-terrorism
+SAMPLE,S-0004,Northern Star Shipping LLC,Entity,North Star Shipping;Severnaya Zvezda,,RU,Sample Russia regime
+SAMPLE,S-0005,Golden Crescent Trading Company,Entity,Golden Crescent Trading,,IR,Sample Iran regime
+SAMPLE,S-0006,Maria Elena Gutierrez Morales,Individual,Maria Gutierrez,1985-06-30,VE,Sample Venezuela regime
+SAMPLE,S-0007,Ahmed Hassan Yusuf,Individual,Ahmad Hasan Yousef,1969,SO,Sample counter-terrorism
+SAMPLE,S-0008,Pyongyang Unity Bank,Entity,Unity Bank of Pyongyang,,KP,Sample DPRK regime
+SAMPLE,S-0009,Sergei Alexandrovich Volkov,Individual,Sergey Volkoff,1975-01-22,RU,Sample Russia regime
+SAMPLE,S-0010,Blue Lotus Investments Ltd,Entity,Blue Lotus Holdings,,MM,Sample Myanmar regime

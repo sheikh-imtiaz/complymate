@@ -1,0 +1,8 @@
+@import "tailwindcss";
+@import "@complymate/config/tailwind/theme.css";
+@source "../../../../packages/ui/src";
+
+.prose h3 { @apply mt-4 mb-2 text-base font-semibold; }
+.prose p { @apply my-2; }
+.prose ul { @apply my-2 list-disc pl-6; }
+.prose ol { @apply my-2 list-decimal pl-6; }

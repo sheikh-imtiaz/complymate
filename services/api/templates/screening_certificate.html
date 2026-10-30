@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @page { size: A4; margin: 2cm; @bottom-center { content: "ComplyMate screening certificate · page " counter(page); font-size: 9pt; color: #666; } }
+  body { font-family: 'DejaVu Sans', sans-serif; font-size: 10.5pt; color: #1a1a1a; }
+  h1 { color: #0F4C81; margin-bottom: 0; }
+  .meta { color: #555; margin-top: 4px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+  th, td { border: 1px solid #ddd; padding: 6px 8px; text-align: left; vertical-align: top; }
+  th { background: #f2f5f9; }
+  .ok { color: #1b7a3a; font-weight: bold; }
+  .warn { color: #a15c00; font-weight: bold; }
+  .small { font-size: 9pt; color: #666; }
+</style>
+</head>
+<body>
+  <h1>Sanctions &amp; PEP screening certificate</h1>
+  <p class="meta">{{ firm }} · generated {{ generated_at.strftime('%d %b %Y %H:%M UTC') }}</p>
+
+  <table>
+    <tr><th>Client</th><td>{{ client.display_name }} ({{ client.client_type }})</td></tr>
+    <tr><th>Latest screening</th><td>{{ run.created_at.strftime('%d %b %Y %H:%M UTC') }} · trigger: {{ run.trigger }}</td></tr>
+    <tr><th>Names screened</th><td>{{ run.screened_names | join(', ') }}</td></tr>
+    <tr><th>PEP declaration</th><td>{{ 'Declared PEP' if client.is_pep else 'Not a PEP (declared)' }}</td></tr>
+    <tr><th>Result</th>
+      <td>
+        {% set open = matches | selectattr('status', 'in', ['open', 'needs_info']) | list %}
+        {% set confirmed = matches | selectattr('status', 'equalto', 'true_match') | list %}
+        {% if confirmed %}<span class="warn">Confirmed match — do not proceed; consider an SMR</span>
+        {% elif open %}<span class="warn">{{ open | length }} possible match(es) under review</span>
+        {% else %}<span class="ok">No unresolved matches</span>{% endif %}
+      </td>
+    </tr>
+  </table>
+
+  <h3>Lists checked</h3>
+  <table>
+    <tr><th>Source</th><th>Version</th><th>Entries</th><th>Fetched</th></tr>
+    {% for v in versions %}
+    <tr><td>{{ v.source }}</td><td>{{ v.version_label }}</td><td>{{ v.entry_count }}</td><td>{{ v.fetched_at.strftime('%d %b %Y') }}</td></tr>
+    {% endfor %}
+  </table>
+
+  {% if matches %}
+  <h3>Match decisions</h3>
+  <table>
+    <tr><th>Name screened</th><th>List entry</th><th>Score</th><th>Decision</th><th>Note</th></tr>
+    {% for m in matches %}
+    <tr><td>{{ m.subject_name }}</td><td>{{ m.entry.primary_name }} ({{ m.entry.source }} {{ m.entry.reference }})</td>
+        <td>{{ m.score }}</td><td>{{ m.status }}</td><td>{{ m.review_note or '' }}</td></tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+
+  <p class="small">Screening uses fuzzy and phonetic name matching against the lists above. A "no match" result does not
+  guarantee a person is not sanctioned. General information, not legal advice.</p>
+</body>
+</html>

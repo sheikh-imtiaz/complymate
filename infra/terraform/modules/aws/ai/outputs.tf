@@ -1,0 +1,2 @@
+output "guardrail_id" { value = aws_bedrock_guardrail.this.guardrail_id }
+output "guardrail_version" { value = aws_bedrock_guardrail_version.this.version }

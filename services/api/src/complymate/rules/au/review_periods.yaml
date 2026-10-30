@@ -1,0 +1,11 @@
+version: "au-2026.10.1"
+jurisdiction: AU
+# Months until the next ongoing CDD review, by risk level
+review_months:
+  low: 36
+  medium: 24
+  high: 12
+# Days before the review date to create a reminder task
+reminder_days_before: 30
+# Program annual review
+program_review_months: 12

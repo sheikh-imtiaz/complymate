@@ -1,0 +1,13 @@
+# image_uri comes from CI (-var image_uri=...). github_access_token from TF_VAR_github_access_token.
+zone_name                   = null # e.g. "dev.complymate.com.au" once the hosted zone exists
+alert_emails                = []
+vpc_cidr                    = "10.40.0.0/16"
+az_count                    = 2
+enable_nat_gateway          = true
+endpoint_services           = ["secretsmanager", "sqs", "kms", "bedrock-runtime"]
+db_min_acu                  = 0 # auto-pause when idle
+db_max_acu                  = 4
+db_instance_count           = 1
+api_provisioned_concurrency = 0
+llm_monthly_budget_usd      = 100
+monthly_budget_usd          = 300
