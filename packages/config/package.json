@@ -1,0 +1,12 @@
+{
+  "name": "@complymate/config",
+  "version": "0.1.0",
+  "private": true,
+  "files": ["eslint", "tsconfig", "tailwind"],
+  "exports": {
+    "./eslint": "./eslint/index.mjs",
+    "./tsconfig/base.json": "./tsconfig/base.json",
+    "./tsconfig/nextjs.json": "./tsconfig/nextjs.json",
+    "./tailwind/theme.css": "./tailwind/theme.css"
+  }
+}

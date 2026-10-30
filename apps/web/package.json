@@ -1,0 +1,50 @@
+{
+  "name": "@complymate/web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 3000",
+    "build": "next build",
+    "start": "next start --port 3000",
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "e2e": "playwright test"
+  },
+  "dependencies": {
+    "@complymate/api-types": "workspace:*",
+    "@complymate/ui": "workspace:*",
+    "@hookform/resolvers": "3.10.0",
+    "@tanstack/react-query": "5.105.0",
+    "@tanstack/react-table": "8.21.3",
+    "@tiptap/react": "2.27.3",
+    "@tiptap/starter-kit": "2.27.3",
+    "lucide-react": "0.469.0",
+    "next": "15.5.28",
+    "next-intl": "3.26.5",
+    "oidc-client-ts": "3.5.0",
+    "react": "19.1.10",
+    "react-dom": "19.1.10",
+    "react-hook-form": "7.91.0",
+    "recharts": "2.15.4",
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@complymate/config": "workspace:*",
+    "@eslint/eslintrc": "3.3.1",
+    "@playwright/test": "1.51.1",
+    "@tailwindcss/postcss": "4.3.3",
+    "@testing-library/jest-dom": "6.6.3",
+    "@testing-library/react": "16.3.3",
+    "@types/node": "22.10.2",
+    "@types/react": "19.1.8",
+    "@types/react-dom": "19.1.6",
+    "@vitejs/plugin-react": "4.7.0",
+    "eslint": "9.39.5",
+    "eslint-config-next": "15.5.28",
+    "jsdom": "25.0.1",
+    "tailwindcss": "4.3.3",
+    "typescript": "5.9.3",
+    "vitest": "2.1.9"
+  }
+}

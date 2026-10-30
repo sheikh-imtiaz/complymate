@@ -1,0 +1,38 @@
+{
+  "name": "@complymate/platform-admin",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 3001",
+    "build": "next build",
+    "start": "next start --port 3001",
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit",
+    "test": "echo \"platform-admin: e2e only (pnpm e2e)\"",
+    "e2e": "playwright test"
+  },
+  "dependencies": {
+    "@complymate/api-types": "workspace:*",
+    "@complymate/ui": "workspace:*",
+    "@tanstack/react-query": "5.105.0",
+    "lucide-react": "0.469.0",
+    "next": "15.5.28",
+    "oidc-client-ts": "3.5.0",
+    "react": "19.1.10",
+    "react-dom": "19.1.10",
+    "recharts": "2.15.4"
+  },
+  "devDependencies": {
+    "@complymate/config": "workspace:*",
+    "@eslint/eslintrc": "3.3.1",
+    "@playwright/test": "1.51.1",
+    "@tailwindcss/postcss": "4.3.3",
+    "@types/node": "22.10.2",
+    "@types/react": "19.1.8",
+    "@types/react-dom": "19.1.6",
+    "eslint": "9.39.5",
+    "eslint-config-next": "15.5.28",
+    "tailwindcss": "4.3.3",
+    "typescript": "5.9.3"
+  }
+}
