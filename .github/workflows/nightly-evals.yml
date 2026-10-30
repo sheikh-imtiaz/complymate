@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v4
+      - uses: astral-sh/setup-uv@v7
         with: { version: "0.5.11" }
       - run: cd services/api && uv sync --extra dev && uv run pytest -q tests/evals
 
