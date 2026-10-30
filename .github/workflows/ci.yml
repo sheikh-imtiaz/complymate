@@ -32,7 +32,7 @@ jobs:
     env:
       TEST_DATABASE_ADMIN_URL: postgresql+asyncpg://complymate_owner:owner_password@localhost:5432/complymate_test
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: astral-sh/setup-uv@v7
         with:
           version: "0.5.11"
@@ -52,7 +52,7 @@ jobs:
     name: Frontend (types, lint, unit, build)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v4
         with:
           version: 9.15.0
@@ -94,7 +94,7 @@ jobs:
       S3_SECRET_KEY: minioadmin
       NEXT_PUBLIC_AUTH_MODE: dev
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: astral-sh/setup-uv@v7
         with: { version: "0.5.11" }
       - uses: pnpm/action-setup@v4
@@ -114,7 +114,7 @@ jobs:
     name: Terraform (fmt, validate)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: hashicorp/setup-terraform@v4
         with: { terraform_version: 1.9.8 }
       - run: terraform fmt -check -recursive infra/terraform
