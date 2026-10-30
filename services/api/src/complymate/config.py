@@ -30,6 +30,10 @@ class Settings(BaseSettings):
     database_admin_url: str | None = None
     app_db_password: str | None = None
     db_secret_arn: str | None = None
+    db_host: str | None = None  # used when the secret has no host (RDS-managed master secret)
+    db_admin_host: str | None = None
+    db_port: int = 5432
+    db_name: str = "complymate"
     db_admin_secret_arn: str | None = None
     db_pool_size: int = 5
     db_max_overflow: int = 5

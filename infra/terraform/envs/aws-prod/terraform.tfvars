@@ -1,0 +1,12 @@
+zone_name                   = null # e.g. "complymate.com.au"
+alert_emails                = []   # add on-call + security addresses
+vpc_cidr                    = "10.42.0.0/16"
+az_count                    = 3
+enable_nat_gateway          = true
+endpoint_services           = ["secretsmanager", "sqs", "kms", "bedrock-runtime", "textract", "logs", "states", "sts"]
+db_min_acu                  = 1
+db_max_acu                  = 32
+db_instance_count           = 2 # writer + reader in another AZ
+api_provisioned_concurrency = 2 # keeps p95 low by avoiding cold starts
+llm_monthly_budget_usd      = 1000
+monthly_budget_usd          = 2500

@@ -53,10 +53,12 @@ class Container:
         if not secret_name:
             raise RuntimeError("DATABASE_URL or DB_SECRET_ARN must be set")
         sec = await self.secrets.get_json(secret_name)
-        host = sec.get("proxy_host") or sec["host"]
+        host = sec.get("proxy_host") or sec.get("host") or (s.db_admin_host if admin else s.db_host)
+        if not host:
+            raise RuntimeError("database host missing from secret and DB_HOST/DB_ADMIN_HOST")
         return (
             f"postgresql+asyncpg://{quote_plus(sec['username'])}:{quote_plus(sec['password'])}"
-            f"@{host}:{sec.get('port', 5432)}/{sec.get('dbname', 'complymate')}"
+            f"@{host}:{sec.get('port', s.db_port)}/{sec.get('dbname', s.db_name)}"
         )
 
     async def sessionmaker(self) -> async_sessionmaker[AsyncSession]:

@@ -16,7 +16,8 @@ class CognitoIdentity:
     def __init__(self, region: str, user_pool_id: str, audience: str) -> None:
         self.region = region
         self.user_pool_id = user_pool_id
-        self.audience = audience
+        # Comma-separated: the tenant web app and the platform admin app use different app clients.
+        self.audiences = [a.strip() for a in audience.split(",") if a.strip()]
         self.issuer = f"https://cognito-idp.{region}.amazonaws.com/{user_pool_id}"
         self._jwks = jwt.PyJWKClient(f"{self.issuer}/.well-known/jwks.json", cache_keys=True, lifespan=3600)
         self._client = client("cognito-idp", region)
@@ -29,10 +30,10 @@ class CognitoIdentity:
             data: dict[str, Any] = jwt.decode(
                 token, signing_key.key, algorithms=["RS256"], issuer=self.issuer, options={"verify_aud": False}
             )
-            if data.get("client_id") != self.audience:
+            if data.get("client_id") not in self.audiences:
                 raise jwt.InvalidAudienceError("wrong client_id")
         else:
-            data = jwt.decode(token, signing_key.key, algorithms=["RS256"], issuer=self.issuer, audience=self.audience)
+            data = jwt.decode(token, signing_key.key, algorithms=["RS256"], issuer=self.issuer, audience=self.audiences)
         auth_time = data.get("auth_time")
         return TokenClaims(
             sub=data["sub"],

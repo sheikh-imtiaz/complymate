@@ -11,6 +11,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from complymate import __version__
 from complymate.api import errors
 from complymate.api.middleware.audit import AuditContextMiddleware
+from complymate.api.middleware.m2m import M2MPrefixMiddleware
 from complymate.api.middleware.rate_limit import RateLimitMiddleware
 from complymate.api.middleware.request_id import RequestIdMiddleware
 from complymate.api.middleware.tenant_context import TenantContextMiddleware
@@ -95,6 +96,7 @@ def create_app() -> FastAPI:
         expose_headers=["X-Request-Id", "Content-Disposition"],
     )
     app.add_middleware(RequestIdMiddleware)
+    app.add_middleware(M2MPrefixMiddleware)
 
     for module in (
         health,

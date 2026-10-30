@@ -1,0 +1,13 @@
+output "api_url" { value = local.api_url }
+output "http_api_endpoint" { value = module.api.http_api_endpoint }
+output "ws_url" { value = module.websocket.ws_url }
+output "worker_function" { value = module.workers.function_name }
+output "cognito_user_pool_id" { value = module.identity.user_pool_id }
+output "cognito_web_client_id" { value = module.identity.web_client_id }
+output "cognito_admin_client_id" { value = module.identity.admin_client_id }
+output "cognito_hosted_ui" { value = module.identity.hosted_ui_domain }
+output "oidc_issuer" { value = module.identity.issuer }
+output "frontend_domains" { value = length(module.frontend) > 0 ? module.frontend[0].default_domains : {} }
+output "database_cluster_endpoint" { value = module.database.cluster_endpoint }
+output "alerts_topic_arn" { value = module.observability.alerts_topic_arn }
+output "stripe_secret_arn" { value = aws_secretsmanager_secret.stripe.arn }
