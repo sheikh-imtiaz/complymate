@@ -2,7 +2,7 @@
 #   AWS Lambda: entrypoint detects AWS_LAMBDA_RUNTIME_API and runs awslambdaric with the handler from CMD
 #               (api_handler | worker_handler | ws_handler, set per function in Terraform image_config).
 #   Azure Container Apps / local: runs uvicorn (API) or the worker loop (CMD "worker").
-FROM python:3.12-slim-bookworm AS base
+FROM python:3.15-slim-bookworm AS base
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
