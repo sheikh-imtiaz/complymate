@@ -201,7 +201,7 @@ wheels = [
 
 [[package]]
 name = "azure-keyvault-keys"
-version = "4.11.3"
+version = "4.12.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "azure-core" },
@@ -209,9 +209,9 @@ dependencies = [
     { name = "isodate" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/6e/d4/e0ba8e8d661fcb2f536e1ba572369053aa37e3bc5c0bdb9aaab6603248ab/azure_keyvault_keys-4.11.3.tar.gz", hash = "sha256:abe258a46937ab69b148d1832150192f6a300578451d69304a0c3be24b9881aa", size = 279998, upload-time = "2026-10-02T23:09:56.188Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/aa/7b/165b1116300d1409a10e072cdb9d3b7b0c9051b7b48d6f99aafe14070af2/azure_keyvault_keys-4.12.0.tar.gz", hash = "sha256:23c046c4c8df6a1edfdaac6e0752aec2f883eae49e98405e8bf648e886247b0a", size = 304850, upload-time = "2026-11-12T23:25:44.356Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/c9/8c/068322e5b6803cf2babde45a9a20d61697bc584a52710ac1f75d1c350bcb/azure_keyvault_keys-4.11.3-py3-none-any.whl", hash = "sha256:c492fa29cc2f437d1ad2464e7ddf5f40196c8ec8e25fad94dae5d474e0432d0a", size = 202493, upload-time = "2026-10-02T23:09:58.018Z" },
+    { url = "https://files.pythonhosted.org/packages/b0/7a/384846cd1779782a3a5527790727276da40fb01612f2f69455e4783d3353/azure_keyvault_keys-4.12.0-py3-none-any.whl", hash = "sha256:7c09bd13895e74de82377ac68b0916954328c35937dfda0f26c45cda99670e9d", size = 217742, upload-time = "2026-11-12T23:25:46.209Z" },
 ]
 
 [[package]]
